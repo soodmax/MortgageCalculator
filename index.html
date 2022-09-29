@@ -12,14 +12,14 @@
       crossorigin="anonymous"
     />
 
-    <title>Document</title>
+    <title>Amortization Calculator</title>
   </head>
   <body>
     <header></header>
     <main>
       <div class="container-sm">
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             <form id="mortgageForm">
               <div class="card mt-4 mb-4 rounded-3 shadow-sm border-primary">
                 <div class="card-header py-3 text-bg-primary border-primary">
@@ -36,6 +36,7 @@
                         type="text"
                         class="form-control"
                         id="mortgageAmount"
+                        name="mortgageAmount"
                         placeholder=""
                       />
                     </div>
@@ -49,6 +50,7 @@
                         type="text"
                         class="form-control"
                         id="interestRate"
+                        name="interestRate"
                         placeholder=""
                       />
                       <span class="input-group-text">%</span>
@@ -61,7 +63,8 @@
                     <div class="input-group">
                       <select
                         id="amortizationPeriodYears"
-                        class="form-select mb-3"
+                        name="amortizationPeriodYears"
+                        class="form-select mb-auto"
                         aria-label=".form-select example"
                       >
                         <option selected></option>
@@ -97,8 +100,9 @@
                         <option value="30">30 Years</option>
                       </select>
                       <select
-                        id="amortizationPeriodMonths"
-                        class="form-select mb-3"
+                      id="amortizationPeriodMonths"
+                      name="amortizationPeriodMonths"
+                        class="form-select mb-auto"
                         aria-label=".form-select"
                       >
                         <option selected></option>
@@ -122,16 +126,17 @@
                     >
                     <select
                       id="paymentFrequency"
-                      class="form-select mb-3"
+                      name="paymentFrequency"
+                      class="form-select mb-auto"
                       aria-label=".form-select example"
                     >
                       <option selected></option>
-                      <option value="1">Accelerated Weekly</option>
-                      <option value="2">Weekly</option>
-                      <option value="3">Accelerated Bi-weekly</option>
-                      <option value="4">Bi-weekly (every 2 weeks)</option>
-                      <option value="5">Semi-monthly (24x per year)</option>
-                      <option value="6">Monthly (12x per year)</option>
+                      <option value="Accelerated Weekly">Accelerated Weekly</option>
+                      <option value="Weekly">Weekly</option>
+                      <option value="Accelerated Bi-weekly">Accelerated Bi-weekly</option>
+                      <option value="Bi-weekly (every 2 weeks)">Bi-weekly (every 2 weeks)</option>
+                      <option value="Semi-monthly (24x per year)">Semi-monthly (24x per year)</option>
+                      <option value="Monthly (12x per year)">Monthly (12x per year)</option>
                     </select>
                   </div>
                   <div class="mb-3">
@@ -140,7 +145,8 @@
                     >
                     <select
                       id="term"
-                      class="form-select mb-3"
+                      name="term"
+                      class="form-select mb-auto"
                       aria-label=".form-select example"
                     >
                       <option selected></option>
@@ -163,12 +169,36 @@
               </div>
             </form>
           </div>
-          <div class="col-6">
-            <div class="card mt-4 mb-4 rounded-3 shadow-sm border-primary">
-              <div class="card-header py-3 text-bg-secondary border-primary">
-                <h4 class="my-0 fw-normal">Calculations</h4>
+          <div class="col-4">
+            <div class="card mt-4 mb-4 rounded-3 shadow-sm border-secondary">
+              <div class="card-header py-3 text-bg-secondary border-secondary">
+                <h4 class="my-0 fw-normal">Prepayment Plan</h4>
               </div>
-              <div class="card-body"></div>
+              <div class="card-body">
+                <ul class="list-group">
+                  <li class="list-group-item">An item</li>
+                  <li class="list-group-item">A second item</li>
+                  <li class="list-group-item">A third item</li>
+                  <li class="list-group-item">A fourth item</li>
+                  <li class="list-group-item">And a fifth one</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card mt-4 mb-4 rounded-3 shadow-sm border-info">
+              <div class="card-header py-3 text-bg-info border-info">
+                <h4 class="my-0 fw-normal">Calculation Summary</h4>
+              </div>
+              <div class="card-body">
+                <ul class="list-group">
+                  <li class="list-group-item">An item</li>
+                  <li class="list-group-item">A second item</li>
+                  <li class="list-group-item">A third item</li>
+                  <li class="list-group-item">A fourth item</li>
+                  <li class="list-group-item">And a fifth one</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

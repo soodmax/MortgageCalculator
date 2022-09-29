@@ -2,24 +2,32 @@
 
 let $ = document.querySelector.bind(document);
 
-const mortgageForm = $('#mortgageForm');
+let mortgageForm = document.querySelector('form'); //$('#mortgageForm');
+let mortgageAmount = $('#mortgageAmount');
+let interestRate = $('#interestRate');
+let amortizationPeriodYears = $('#amortizationPeriodYears');
+let amortizationPeriodMonths = $('#amortizationPeriodMonths');
+let paymentFrequency = $('#paymentFrequency');
+let term = $('#term');
 
-mortgageForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+document.addEventListener('DOMContentLoaded', initialize);
 
-  let mortgageAmount = $('#mortgageAmount');
-  let interestRate = $('#interestRate');
-  let amortizationPeriodYears = $('#amortizationPeriodYears');
-  let amortizationPeriodMonths = $('#amortizationPeriodMonths');
-  let paymentFrequency = $('#paymentFrequency');
-  let term = $('#term');
+function initialize() {
+  mortgageAmount.value = '121815.72';
+  interestRate.value = '3.70';
+  amortizationPeriodYears.value = 10;
+  amortizationPeriodMonths.value = 1;
+  paymentFrequency.value = 'Accelerated Bi-weekly';
+  term.value = 5;
+}
 
-  let mortgageAmountValue = (mortgageAmount.value)
-  let interestRateValue = (interestRate.value)
-  let amortizationPeriodYearsValue = (amortizationPeriodYears.value)
-  let amortizationPeriodMonthsValue = (amortizationPeriodMonths.value)
-  let paymentFrequencyValue = (paymentFrequency.options[paymentFrequency.selectedIndex].text)
-  let termValue = (term.value)
+mortgageForm.addEventListener('submit', (event) => {
+  event.preventDefault();
 
+  const formData = new FormData(event.target);
+  const formDataObj = {};
   
+  formData.forEach((value, key) => (formDataObj[key] = value));
+
+  console.log(formDataObj.term)
 });
