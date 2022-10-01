@@ -2,14 +2,14 @@
 
 let $ = document.querySelector.bind(document);
 
-let mortgageForm = $('#mortgageForm');
-let mortgageAmount = $('#mortgageAmount');
-let interestRate = $('#interestRate');
-let amortizationPeriodYears = $('#amortizationPeriodYears');
-let amortizationPeriodMonths = $('#amortizationPeriodMonths');
-let paymentFrequency = $('#paymentFrequency');
-let calculationList = $('#calculationList');
-let term = $('#term');
+let mortgageFormControl = $('#mortgageForm');
+let mortgageAmountControl = $('#mortgageAmount');
+let interestRateControl = $('#interestRate');
+let amortizationPeriodYearsControl = $('#amortizationPeriodYears');
+let amortizationPeriodMonthsControl = $('#amortizationPeriodMonths');
+let paymentFrequencyControl = $('#paymentFrequency');
+let termControl = $('#term');
+let calculationListControl = $('#calculationList');
 
 var formatter = new Intl.NumberFormat('en-CA', {
   style: 'currency',
@@ -21,15 +21,15 @@ var formatter = new Intl.NumberFormat('en-CA', {
 document.addEventListener('DOMContentLoaded', initialize);
 
 function initialize() {
-  mortgageAmount.value = '121815.72';
-  interestRate.value = '3.70';
-  amortizationPeriodYears.value = 10;
-  amortizationPeriodMonths.value = 1;
-  paymentFrequency.value = 'Accelerated Bi-weekly';
-  term.value = 5;
+  mortgageAmountControl.value = '121815.72';
+  interestRateControl.value = '3.70';
+  amortizationPeriodYearsControl.value = 10;
+  amortizationPeriodMonthsControl.value = 1;
+  paymentFrequencyControl.value = 'Accelerated Bi-weekly';
+  termControl.value = 5;
 }
 
-mortgageForm.addEventListener('submit', (event) => {
+mortgageFormControl.addEventListener('submit', (event) => {
   event.preventDefault();
 
   const formData = new FormData(event.target);
@@ -43,48 +43,72 @@ mortgageForm.addEventListener('submit', (event) => {
   let ir = 0;
   let np = 0;
 
-  pv = parseFloat(+amortization.mortgageAmount).toFixed(precision);
-  apr = parseFloat(+(amortization.interestRate / 100)).toFixed(precision);
+  let mortgageAmount = parseFloat(amortization.mortgageAmount);
+  let interestRate = parseFloat(amortization.interestRate);
+  let amortizationPeriodYears = parseInt(amortization.amortizationPeriodYears);
+  let amortizationPeriodMonths = parseInt(
+    amortization.amortizationPeriodMonths
+  );
+
+  pv = parseFloat(mortgageAmount).toFixed(precision);
+  apr = parseFloat(interestRate / 100).toFixed(precision);
   ir = parseFloat(apr / 12).toFixed(precision);
   np = parseFloat(
-    +amortization.amortizationPeriodYears * 12 +
-      +amortization.amortizationPeriodMonths
+    amortizationPeriodYears * 12 + amortizationPeriodMonths
   ).toFixed(precision);
 
-
-  ClearList();
+  ClearList(calculationListControl);
 
   let pmt = Math.abs(PMT(+ir, +np, +pv).toFixed(precision));
-  AddToList('Monthly Payment: ' + formatter.format(pmt.toFixed(precision)));
+  AddToList(
+    'Monthly Payment: ' + formatter.format(pmt.toFixed(precision)),
+    calculationListControl
+  );
 
-  let smpmt = (pmt * 12) / 24;
-  AddToList('Semi Monthly Payment: ' + formatter.format(smpmt.toFixed(precision)));
+  let smpmt = parseFloat((pmt * 12) / 24);
+  AddToList(
+    'Semi Monthly Payment: ' + formatter.format(smpmt.toFixed(precision)),
+    calculationListControl
+  );
 
-  let bwkly = (pmt * 12) / 26;
-  AddToList('Bi-Weekly Payment: ' + formatter.format(bwkly.toFixed(precision)));
+  let bwkly = parseFloat((pmt * 12) / 26);
+  AddToList(
+    'Bi-Weekly Payment: ' + formatter.format(bwkly.toFixed(precision)),
+    calculationListControl
+  );
 
-  let bwklya = pmt / 2;
-  AddToList('Bi-Weekly Accelerated Payment: ' + formatter.format(bwklya.toFixed(precision)));
+  let bwklya = parseFloat(pmt / 2);
+  AddToList(
+    'Bi-Weekly Accelerated Payment: ' +
+      formatter.format(bwklya.toFixed(precision)),
+    calculationListControl
+  );
 
-  let wkly = (pmt * 12) / 52;
-  AddToList('Weekly Payment: ' + formatter.format(wkly.toFixed(precision)));
+  let wkly = parseFloat((pmt * 12) / 52);
+  AddToList(
+    'Weekly Payment: ' + formatter.format(wkly.toFixed(precision)),
+    calculationListControl
+  );
 
-  let wklya = pmt / 4;
-  AddToList('Weekly Accelerated Payment: ' + formatter.format(wklya.toFixed(precision)));
+  let wklya = parseFloat(pmt / 4);
+  AddToList(
+    'Weekly Accelerated Payment: ' + formatter.format(wklya.toFixed(precision)),
+    calculationListControl
+  );
 });
 
-function ClearList() {
-  while (calculationList.firstChild) {
-    calculationList.removeChild(calculationList.firstChild);
+function ClearList(list) {
+  while (list.firstChild) {
+    list.removeChild(list.firstChild);
   }
 }
 
-function AddToList(text) {
+function AddToList(textToAdd, list) {
   var li = document.createElement('li');
   li.classList.add('list-group-item');
-  li.appendChild(document.createTextNode(text));
+  li.appendChild(document.createTextNode(textToAdd));
   li.setAttribute('id', 'element4'); // added line
-  calculationList.appendChild(li);
+  list.appendChild(li);
 }
 
 function PMT(ir, np, pv, fv, type) {

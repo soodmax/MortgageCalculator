@@ -11,6 +11,8 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" type="text/css" href="site.css" />
+
     <title>Amortization Calculator</title>
   </head>
   <body>
@@ -99,8 +101,8 @@
                         <option value="30">30 Years</option>
                       </select>
                       <select
-                      id="amortizationPeriodMonths"
-                      name="amortizationPeriodMonths"
+                        id="amortizationPeriodMonths"
+                        name="amortizationPeriodMonths"
                         class="form-select mb-auto"
                         aria-label=".form-select"
                       >
@@ -130,12 +132,22 @@
                       aria-label=".form-select example"
                     >
                       <option selected></option>
-                      <option value="Accelerated Weekly">Accelerated Weekly</option>
+                      <option value="Accelerated Weekly">
+                        Accelerated Weekly
+                      </option>
                       <option value="Weekly">Weekly</option>
-                      <option value="Accelerated Bi-weekly">Accelerated Bi-weekly</option>
-                      <option value="Bi-weekly (every 2 weeks)">Bi-weekly (every 2 weeks)</option>
-                      <option value="Semi-monthly (24x per year)">Semi-monthly (24x per year)</option>
-                      <option value="Monthly (12x per year)">Monthly (12x per year)</option>
+                      <option value="Accelerated Bi-weekly">
+                        Accelerated Bi-weekly
+                      </option>
+                      <option value="Bi-weekly (every 2 weeks)">
+                        Bi-weekly (every 2 weeks)
+                      </option>
+                      <option value="Semi-monthly (24x per year)">
+                        Semi-monthly (24x per year)
+                      </option>
+                      <option value="Monthly (12x per year)">
+                        Monthly (12x per year)
+                      </option>
                     </select>
                   </div>
                   <div class="mb-3">
@@ -191,11 +203,6 @@
               </div>
               <div class="card-body">
                 <ul class="list-group" id="calculationList">
-                  <!-- <li class="list-group-item">An item</li>
-                  <li class="list-group-item">A second item</li>
-                  <li class="list-group-item">A third item</li>
-                  <li class="list-group-item">A fourth item</li>
-                  <li class="list-group-item">And a fifth one</li> -->
                 </ul>
               </div>
             </div>
