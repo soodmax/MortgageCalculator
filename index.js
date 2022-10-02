@@ -7,7 +7,7 @@ let mortgageAmountControl = $('#mortgageAmount');
 let interestRateControl = $('#interestRate');
 let amortizationPeriodYearsControl = $('#amortizationPeriodYears');
 let amortizationPeriodMonthsControl = $('#amortizationPeriodMonths');
-let paymentFrequencyControl = $('#paymentFrequency');
+// let paymentFrequencyControl = $('#paymentFrequency');
 let termControl = $('#term');
 let calculationListControl = $('#calculationList');
 
@@ -25,7 +25,7 @@ function initialize() {
   interestRateControl.value = '3.70';
   amortizationPeriodYearsControl.value = 10;
   amortizationPeriodMonthsControl.value = 1;
-  paymentFrequencyControl.value = 'Accelerated Bi-weekly';
+  // paymentFrequencyControl.value = 'Accelerated Bi-weekly';
   termControl.value = 5;
 }
 
@@ -50,16 +50,15 @@ mortgageFormControl.addEventListener('submit', (event) => {
     amortization.amortizationPeriodMonths
   );
 
-  pv = parseFloat(mortgageAmount).toFixed(precision);
-  apr = parseFloat(interestRate / 100).toFixed(precision);
-  ir = parseFloat(apr / 12).toFixed(precision);
-  np = parseFloat(
-    amortizationPeriodYears * 12 + amortizationPeriodMonths
-  ).toFixed(precision);
+  pv = parseFloat(mortgageAmount);
+  apr = parseFloat(interestRate / 100);
+  ir = parseFloat(apr / 12);
+  np = parseFloat(amortizationPeriodYears * 12 + amortizationPeriodMonths);
 
   ClearList(calculationListControl);
 
-  let pmt = Math.abs(PMT(+ir, +np, +pv).toFixed(precision));
+  let pmt = Math.abs(PMT(ir, np, pv));
+
   AddToList(
     'Monthly Payment: ' + formatter.format(pmt.toFixed(precision)),
     calculationListControl
@@ -106,7 +105,7 @@ function ClearList(list) {
 function AddToList(textToAdd, list) {
   var li = document.createElement('li');
   li.classList.add('list-group-item');
-  li.appendChild(document.createTextNode(textToAdd));
+  li.appendChild(document.createTextNode(textToAdd.toString()));
   li.setAttribute('id', 'element4'); // added line
   list.appendChild(li);
 }
